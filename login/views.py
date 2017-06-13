@@ -19,7 +19,7 @@ def register(request):
         if signup.is_valid():
             p=User(user_name=signup.cleaned_data.get('username'),first_name=signup.cleaned_data.get('firstname'),last_name=signup.cleaned_data.get('lastname'),email=signup.cleaned_data.get('email'),pwd=signup.cleaned_data.get('pwd'))
             p.save()
-    request.session['user_id'] = p.id
+    request.session['user_id'] = p.user_name
     return HttpResponseRedirect(reverse('main:index'))
 
 def logInReq(request):
@@ -28,7 +28,7 @@ def logInReq(request):
         if log.is_valid():
             try:
                 user=User.objects.get(user_name=log.cleaned_data.get('username'),pwd=log.cleaned_data.get('pwd'))
-                request.session['user_id'] = user.id
+                request.session['user_id'] = user.user_name
                 return HttpResponseRedirect(reverse('main:index'))
             except User.DoesNotExist:
                 return HttpResponse("WRONG USERNAME OR PASSWORD")
