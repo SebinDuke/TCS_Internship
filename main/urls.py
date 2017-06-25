@@ -8,12 +8,15 @@ urlpatterns = [
     #url for home-page:
     url(r'^$', views.index, name='index'),
 
-    #url for donate-page:
+    #url for donate:
     url(r'donate$', views.donate, name='donate'),
 
-    #url for donate-book:
+    #url not used:
     url(r'donate-book$', views.donatebk,name='donate_book'),
 
-    #url for donate-book:
+    #url for addbook:
     url(r'addbook$', views.addbk,name='addbook'),
+
+    #url for search:
+    url(r'search$', views.search, name='search'),
 ]

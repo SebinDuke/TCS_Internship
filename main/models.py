@@ -6,6 +6,7 @@ class Books(models.Model):
     points = models.IntegerField(default=20)
     price = models.IntegerField(default=0)
     no_of_copies = models.IntegerField(default=0)
+    varification = models.BooleanField(default=False)
     #no_of_topics=models.IntegerField(default=0)
     #type_user=models.BooleanField()
     def __str__(self):

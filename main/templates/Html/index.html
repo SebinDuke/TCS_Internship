@@ -18,7 +18,26 @@
             <a href="{% url 'login:login' %}">Log In</a>
         {% endif %}
         <br>
-        <a href="{% url 'login:signup' %}">Get a book</a>
-        <a href="{% url 'main:donate' %}">Donate a book</a>
+        <form method="POST" action="{% url 'main:search' %}">
+            {% csrf_token %}
+            <input type="text" placeholder="Name or author name search" name="search">
+            <button >search</button>
+        </form>
+
+        {% for i in list %}
+                <p>
+                Book Name:{{ i.book_name }}<br>
+                Author:{{ i.auth_name }}<br>
+                Points:{{ i.points }}<br>
+                
+                
+                {% if i.varification == False %}
+                    This book's data has not varified by our admins yet!
+                {% else %}
+                    <a href="{% url 'main:donate' %}">Donate this book</a>
+                    <a href="{% url 'main:donate' %}">Get this book</a>
+                {% endif %}
+                </p>
+        {% endfor %}
 </body>
 </html>

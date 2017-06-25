@@ -5,31 +5,26 @@ from django.urls import reverse
 #for older versoins of Django use:
 #from django.core.urlresolvers import reverse
 
+import re
+
 from login.models import User
 from .models import Books
 from .forms import AddBookForm
 
 def index(request):
+    li=Books.objects.order_by('-pk')[:10]
     if request.session.has_key('user_id'):
         uid=request.session['user_id']
         try:
             user=User.objects.get(user_name=uid)
-            return render(request, 'Html/index.html',{'usr':user})
+            return render(request, 'Html/index.html',{'usr':user,'list':li})
         except User.DoesNotExist:
             return HttpResponse("UserName not found")
     else:
-        return render(request, 'Html/index.html')
+        return render(request, 'Html/index.html',{'list':li})
 
 def donate(request):
-    if request.session.has_key('user_id'):
-        uid=request.session['user_id']
-        try:
-            user=User.objects.get(user_name=uid)
-            return render(request, 'Html/donate.html', {'usr':user})
-        except User.DoesNotExist:
-            return HttpResponse("UserName not found")
-    else:
-        return  HttpResponseRedirect(reverse('login:login'))
+    return HttpResponse('Book has donated')
 
 def donatebk(request):
     if request.session.has_key('user_id'):
@@ -55,8 +50,27 @@ def addbk(request):
         if book.is_valid():
             price=int(book.cleaned_data.get('price'))
             points=int(price/10)
-            p=Books(book_name=book.cleaned_data.get('bookname'),auth_name=book.cleaned_data.get('auth'),points=points,price=price)
+            p=Books(book_name=book.cleaned_data.get('bookname'),auth_name=book.cleaned_data.get('auth'),points=points,price=price,varification=False)
             p.save()
     
     return HttpResponseRedirect(reverse('main:index'))
 
+def search(request):
+    if request.method == 'POST':
+        search=request.POST['search']
+        #t=Topic.objects.get(topic_text=topic.cleaned_data.get('topic_text'))
+        book_li = Books.objects.all()
+        li=[]
+        for b in book_li:
+            if re.search(search,b.book_name,re.IGNORECASE):
+                li.append(b)
+            elif re.search(search,b.auth_name,re.IGNORECASE):
+                li.append(b)
+        if request.session.has_key('user_id'):
+            uid = request.session['user_id']
+            user = User.objects.get(user_name=uid)
+            return render(request, 'Html/searchresults.html', {'user_id':user,"list": li})
+        else:
+            return render(request, 'Html/searchresults.html', {"list": li})
+    else:
+        return HttpResponse("not POST")

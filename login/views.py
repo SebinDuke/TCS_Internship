@@ -39,3 +39,4 @@ def logout(request):
    except:
       pass
    return HttpResponseRedirect(reverse('main:index'))
+
