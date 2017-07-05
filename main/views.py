@@ -23,8 +23,43 @@ def index(request):
     else:
         return render(request, 'Html/index.html',{'list':li})
 
-def donate(request):
-    return HttpResponse('Book has donated')
+def donate(request,book):
+    if request.session.has_key('user_id'):
+        uid=request.session['user_id']
+        try:
+            user=User.objects.get(user_name=uid)
+            bk=Books.objects.get(book_name=book)
+            bk.no_of_copies+=1
+            pts=bk.points
+            bk.save()
+            user.points+=pts
+            user.save()
+            return HttpResponse('The book'+book+'has been receirved<br>'+'You get'+str(pts)+'points')
+        except (User.DoesNotExist , Books.DoesNotExist):
+            return HttpResponse('Book or user does not exist')
+    else:
+        return HttpResponseRedirect(reverse('login:login'))
+
+
+def getbook(request,book):
+    if request.session.has_key('user_id'):
+        uid=request.session['user_id']
+        try:
+            user=User.objects.get(user_name=uid)
+            bk=Books.objects.get(book_name=book)
+            if bk.no_of_copies==0:
+                return HttpResponse('The book'+book+'is out of stock')
+            bk.no_of_copies-=1
+            pts=bk.points
+            bk.save()
+            user.points-=pts
+            user.save()
+            return HttpResponse('The book'+book+'has been receirved<br>'+'You get'+str(pts)+'points')
+        except (User.DoesNotExist , Books.DoesNotExist):
+            return HttpResponse('Book or user does not exist')
+    else:
+        return HttpResponseRedirect(reverse('login:login'))
+
 
 def donatebk(request):
     if request.session.has_key('user_id'):

@@ -12,6 +12,7 @@
 	<body>
         {% if usr %}
             <h2> {{ usr.user_name }}</h2>
+            <p>Your Points:{{ usr.points }}</p>
             <a href="{% url 'login:logout' %}">Log Out</a>
         {% else %}
             <a href="{% url 'login:signup' %}">Sign Up</a>
@@ -32,10 +33,10 @@
                 
                 
                 {% if i.varification == False %}
-                    This book's data has not varified by our admins yet!
+                    This book's data has not been varified by our admins yet!
                 {% else %}
-                    <a href="{% url 'main:donate' %}">Donate this book</a>
-                    <a href="{% url 'main:donate' %}">Get this book</a>
+                    <a href="{% url 'main:donate' i.book_name %}">Donate this book</a>
+                    <a href="{% url 'main:getbook' i.book_name %}">Get this book</a>
                 {% endif %}
                 </p>
         {% endfor %}
