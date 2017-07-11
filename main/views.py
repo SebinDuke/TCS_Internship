@@ -52,6 +52,8 @@ def getbook(request,book):
                 return HttpResponse('The book'+book+'is out of stock')
             bk.no_of_copies-=1
             pts=bk.points
+            if user.points<pts:
+                return HttpResponse("You don't have the required pts")
             bk.save()
             user.points-=pts
             user.save()
