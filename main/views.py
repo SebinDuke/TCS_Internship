@@ -34,7 +34,8 @@ def donate(request,book):
             bk.save()
             user.points+=pts
             user.save()
-            return HttpResponse('The book'+book+'has been receirved<br>'+'You get'+str(pts)+'points')
+            li=Books.objects.order_by('-pk')[:10]
+            return render(request, 'Html/donate.html',{'usr':user,'list':li,'book':book})
         except (User.DoesNotExist , Books.DoesNotExist):
             return HttpResponse('Book or user does not exist')
     else:
@@ -54,7 +55,8 @@ def getbook(request,book):
             bk.save()
             user.points-=pts
             user.save()
-            return HttpResponse('The book'+book+'has been receirved<br>'+'You get'+str(pts)+'points')
+            li=Books.objects.order_by('-pk')[:10]
+            return render(request, 'Html/getbook.html',{'usr':user,'list':li,'book':book})
         except (User.DoesNotExist , Books.DoesNotExist):
             return HttpResponse('Book or user does not exist')
     else:
