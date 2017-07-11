@@ -13,7 +13,7 @@
         {% load staticfiles %}
         <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/gif" sizes="16x16">
         <link rel="stylesheet" type="text/css" href="{% static '/main/book_card.css' %}"/>
-        <link rel="stylesheet" type="text/css" href="{% static '/main/searchBar.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/main/search.css' %}"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -46,9 +46,9 @@
     <div class="container" id = "navFluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar" style="color: white;"></span>
-          <span class="icon-bar" style="color: white;"></span>
-          <span class="icon-bar" style="color: white;"></span> 
+          <span class="icon-bar" style="color: white; background-color: white"></span>
+          <span class="icon-bar" style="color: white;background-color: white"></span>
+          <span class="icon-bar" style="color: white;background-color: white"></span> 
         </button>
         <a class="navbar-brand" href="/" style = "background-color:rgb(81, 152, 106); display:flex;padding:12px 15px;align-items:center; "><img src="{% static 'images/header_icon.png' %}" style="height: 170%"></a>
       </div>
@@ -93,7 +93,7 @@
 
 
         <div class = "container" class="col-md-12 col-xs-12 col-lg-12 col-sm-12"> 
-        <div class = "search" class="col-md-12" style = "background-color:white;margin-top: 10%"> 
+        <div class="col-md-12 search" > 
         
           
           <div class="col-md-12">
@@ -112,10 +112,10 @@
         <div class = "col-xs-12 col-lg-12 col-sm-12 col-md-12" style="background-color: #f1f1f1; margin-top: 5%">
 
         <div style="padding: 20px 0">
-        
+
             {% for i in list %}
           <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" style="background-color: #f1f1f1; padding: 0px 20px;">
-            <div class="categoryWrap" style = "display:flex; align-items:center; flex-direction:column;height:350px">
+            <div class="categoryWrap" style = "display:flex; align-items:center; flex-direction:column;height:450px">
               <div style = "display:flex; align-items:center">
                 <img src = "{% static 'images/book-open-flat.png' %}" class="catImage text-center" style=" margin-top: 20%;width:80px; height:80px; border-radius: 50px;">
               </div>
@@ -135,13 +135,13 @@
 
                 {% else %}
                 <div class="col-md-12">
-                    <div class="col-xs-12 col-md-6" style = "align-items:center; text-align:center;"><br>
+                    <div class="col-xs-12 col-md-12" style = "align-items:center; text-align:center;"><br>
                     <a href="{% url 'main:donate' i.book_name %}" class="btn btn-info btnBg" style = "background-color: #de5b5b; border-color: #de5b5b">
-                        <span style="padding-right: 20%;">Donate book</span> 
+                        <span >Donate book</span> 
                     </a>
                     </div>
 
-                    <div class="col-xs-12 col-md-6" style = "align-items:center; text-align:center; "><br>
+                    <div class="col-xs-12 col-md-12" style = "align-items:center; text-align:center; "><br>
                     <a href="{% url 'main:getbook' i.book_name %}" class="btn btn-info btnBg" style = "background-color: #5bde95; border-color: #5bde95">
                         <span>Get book</span> 
                     </a>
