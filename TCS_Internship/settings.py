@@ -13,7 +13,10 @@ SECRET_KEY = 'v&n+(d5^fs-w3uo9vb$+^w3k7!d-#j2z&o&@+3(kt!ue^6&4+2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'readers-stop.herokuapp.com',
+    '127.0.0.1',
+    ]
 
 
 # Application definition
