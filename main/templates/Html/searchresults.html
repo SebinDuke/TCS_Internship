@@ -40,7 +40,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar" style = "background-color:rgb(81, 152, 106)">
         <ul class="nav navbar-nav">
-          <li style="font-size: 18px"><a href="/" style="color: white"><strong>Reader's Stop</strong></a></li> 
+          <li style="font-size:20px"><a href="/" style="color: white"><strong>Reader's Stop</strong></a></li> 
         </ul>
         <ul class="nav navbar-nav navbar-right">
         {% if usr %}
@@ -48,7 +48,8 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white"> {{ usr.user_name }} <span class="glyphicon glyphicon-option-horizontal"></span></a>
           <ul style="text-align:left;" class="dropdown-menu">                 
-                          <li><a href="" style="color: black; background-color:#f1f1f1">Your Points:{{ usr.points }}</a></li>   
+                          <li><a href="" style="color: black; background-color:#f1f1f1">Your Points:{{ usr.points }}</a></li> 
+                          <li><a href="{% url 'main:orders' %}" style="color: black; background-color:#f1f1f1">Your Orders</a></li>  
           </ul>
           </li> 
         <li style = "background-color:rgb(81, 152, 106);"><a href="{% url 'login:logout' %}" style="color: white"> Logout </a></li>
@@ -92,7 +93,7 @@
       </div>
         
 
-
+<div class="container">
         <div class = "col-xs-12 col-lg-12 col-sm-12 col-md-12" style="background-color: #f1f1f1; margin-top: 5%">
 
         <div style="padding: 20px 0">
@@ -166,6 +167,7 @@
               <button id="button">Add Book</button>
             </form>
         {% endif %}
+        </div>
 </body>
 </html>
 

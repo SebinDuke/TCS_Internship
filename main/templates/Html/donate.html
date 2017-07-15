@@ -37,7 +37,7 @@
           <span class="icon-bar" style="color: white;background-color: white"></span>
           <span class="icon-bar" style="color: white;background-color: white"></span> 
         </button>
-        <a class="navbar-brand" href="/" style = "background-color:rgb(81, 152, 106); display:flex;padding:12px 15px;align-items:center; "><img src="{% static 'images/header_icon.png' %}" style="height:300%"></a>
+        <a class="navbar-brand" href="/" style = "background-color:rgb(81, 152, 106); display:flex;padding:12px 15px;align-items:center; "><img src="{% static 'images/header_icon.png' %}" style="height: 300%"></a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar" style = "background-color:rgb(81, 152, 106)">
         <ul class="nav navbar-nav">
@@ -49,7 +49,8 @@
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white"> {{ usr.user_name }} <span class="glyphicon glyphicon-option-horizontal"></span></a>
           <ul style="text-align:left;" class="dropdown-menu">                 
-                          <li><a href="" style="color: black; background-color:#f1f1f1">Your Points:{{ usr.points }}</a></li>   
+                          <li><a href="" style="color: black; background-color:#f1f1f1">Your Points:{{ usr.points }}</a></li> 
+                          <li><a href="{% url 'main:orders' %}" style="color: black; background-color:#f1f1f1">Your Orders</a></li>  
           </ul>
           </li> 
         <li style = "background-color:rgb(81, 152, 106);"><a href="{% url 'login:logout' %}" style="color: white"> Logout </a></li>
@@ -91,7 +92,7 @@
         </form>    -->
 
 
-
+<div class="container">
         <div class = "col-xs-12 col-lg-12 col-sm-12 col-md-12" style="background-color: #f1f1f1; margin-top: 5%">
 
         <div style="padding: 20px 0">
@@ -147,6 +148,7 @@
         </div>
       </div>
     </div> 
+    </div>
 
   <!--      {% for i in list %}
                 <p>
@@ -163,5 +165,53 @@
                 {% endif %}
                 </p>
         {% endfor %}     -->
+
+
+<!-- ======================================FOOTER============================================ -->
+<link rel="stylesheet" type="text/css" href="{% static '/main/footer.css' %}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="dashboard-page">
+
+    <div class='footer' style="margin-top: 10%;">
+ <div class='container'>
+   <div class='row'>
+
+     <div class='clearfix visible-xs'></div>
+
+     
+
+
+    <div class='col-sm-12 col-md-12 col-xs-12' style="text-align: center; align-items: center;">
+      
+
+      <h4>CONTACT US</h4>
+      <h5 style="color:#ED5E44;">+91 9999688904</h5>
+      <h5 style="color:#ED5E44;">help_readers@gmail.com</h5>
+   
+    </div>
+
+  </div>
+
+  
+
+  </div>
+  <div class="sec-footer">
+       <div style="display:flex; justify-content:center;align-items:center;">
+           
+           <img style="padding:0 20px; height: 50px;" src="{% static 'images/footer_logo.png' %}">
+     </div>
+  </div>
+  <div style="text-align:center;background-color:#252525; height:60px;padding-top: 10px">
+  <div class="sec-content" style="display: inline">
+        &copy; 2017 Reader's Stop
+        <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> at TCS.
+      </div> 
+
+    </div>
+</div> 
+</div> 
+<!-- ================================================================= -->
 </body>
 </html>
