@@ -8,7 +8,7 @@ from django.urls import reverse
 import re
 
 from login.models import User
-from .models import Books
+from .models import Books,Order
 from .forms import AddBookForm
 
 def index(request):
@@ -48,17 +48,8 @@ def getbook(request,book):
         try:
             user=User.objects.get(user_name=uid)
             bk=Books.objects.get(book_name=book)
-            if bk.no_of_copies==0:
-                return HttpResponse('The book'+book+'is out of stock')
-            bk.no_of_copies-=1
-            pts=bk.points
-            if user.points<pts:
-                return HttpResponse("You don't have the required pts")
-            bk.save()
-            user.points-=pts
-            user.save()
-            li=Books.objects.order_by('-pk')[:10]
-            return render(request, 'Html/getbook.html',{'usr':user,'list':li,'book':book})
+
+            return render(request, 'Html/confirmord.html',{'usr':user,'book':bk})
         except (User.DoesNotExist , Books.DoesNotExist):
             return HttpResponse('Book or user does not exist')
     else:
@@ -113,3 +104,44 @@ def search(request):
             return render(request, 'Html/searchresults.html', {"list": li})
     else:
         return HttpResponse("not POST")
+
+def confirm(request):
+    if request.session.has_key('user_id'):
+        uid=request.session['user_id']
+        book=request.POST['book']
+        address=request.POST['add']
+        try:
+            user=User.objects.get(user_name=uid)
+            bk=Books.objects.get(book_name=book)
+            if bk.no_of_copies==0:
+                return HttpResponse('The book'+book+'is out of stock')
+            bk.no_of_copies-=1
+            pts=bk.points
+            if user.points<pts:
+                return HttpResponse("You don't have the required pts")
+            bk.save()
+            user.points-=pts
+            user.save()
+            if address=="":
+                address=user.address
+            order=Order(user=user,book=bk,delivered=False,address=address)
+            order.save()
+            li=Books.objects.order_by('-pk')[:10]
+            return render(request, 'Html/getbook.html',{'usr':user,'list':li,'book':book})
+        except (User.DoesNotExist , Books.DoesNotExist):
+            return HttpResponse('Book or user does not exist')
+    else:
+        return HttpResponseRedirect(reverse('login:login'))
+
+def orders(request):
+    if request.session.has_key('user_id'):
+        uid=request.session['user_id']
+        try:
+            user=User.objects.get(user_name=uid)
+            li=Order.objects.filter(user=user)
+            return render(request, 'Html/orders.html',{'list':li,'usr':user})
+        except (User.DoesNotExist , Books.DoesNotExist):
+            return HttpResponse('Book or user does not exist')
+
+    else:
+        return HttpResponseRedirect(reverse('login:login'))

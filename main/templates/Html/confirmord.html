@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	<head>
+		<meta name="fragment" content="!">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		
+        <title>ReadersStop</title>
+		
+        <meta name="generator" content="Bootply" />
+
+        {% load staticfiles %}
+        <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/gif" sizes="16x16">
+        <link rel="stylesheet" type="text/css" href="{% static '/main/book_card.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static '/main/search.css' %}"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Satisfy' rel='stylesheet' type='text/css'>
+        <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.form/4.2.1/jquery.form.min.js" integrity="sha384-tIwI8+qJdZBtYYCKwRkjxBGQVZS3gGozr3CtI+5JF/oL1JmPEHzCEnIKbDbLTCer" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <script src="https://use.fontawesome.com/b37c191d35.js"></script>
+		
+	</head>
+	<body style="background-color: #4c8eaf;">
+    <!-- ===============TODO==================== -->
+        <!-- {% if usr %}
+            <h2> {{ usr.user_name }}</h2>
+            <p>Your Points:{{ usr.points }}</p>
+            <a href="{% url 'login:logout' %}">Log Out</a>
+        {% else %}
+            <a href="{% url 'login:signup' %}">Sign Up</a>
+            <a href="{% url 'login:login' %}">Log In</a>
+        {% endif %}
+        <br> -->
+        <!-- ========================================= -->
+
+
+
+<!-- ===================================HEADER========================================================== -->
+
+        <nav class = "navbar navbar-default navbar-fixed-top" style = "background-color:rgb(81, 152, 106)">
+    <div class="container" id = "navFluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar" style="color: white; background-color: white"></span>
+          <span class="icon-bar" style="color: white;background-color: white"></span>
+          <span class="icon-bar" style="color: white;background-color: white"></span> 
+        </button>
+        <a class="navbar-brand" href="/" style = "background-color:rgb(81, 152, 106); display:flex;padding:12px 15px;align-items:center; "><img src="{% static 'images/header_icon.png' %}" style="height: 300%"></a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar" style = "background-color:rgb(81, 152, 106)">
+        <ul class="nav navbar-nav">
+          <li style="font-size:20px"><a href="/" style="color: white"><strong>Reader's Stop</strong></a></li> 
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+        {% if usr %}
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="color: white"> {{ usr.user_name }} <span class="glyphicon glyphicon-option-horizontal"></span></a>
+          <ul style="text-align:left;" class="dropdown-menu">                 
+                          <li><a href="" style="color: black; background-color:#f1f1f1">Your Points:{{ usr.points }}</a></li>   
+          </ul>
+          </li> 
+        <li style = "background-color:rgb(81, 152, 106);"><a href="{% url 'login:logout' %}" style="color: white"> Logout </a></li>
+        
+
+
+        {% else %}
+            <li style = "background-color:rgb(81, 152, 106);"><a href="{% url 'login:signup' %}" style="color: white"> Sign Up </a></li>
+            <li style = "background-color:rgb(81, 152, 106);"><a href="{% url 'login:login' %}" style="color: white"> Log In </a></li>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+
+
+
+
+<!-- ======================================================================================================================= -->
+<br><br><br><br><br><br>
+<form method="POST" action="{% url 'main:confirm' %}">
+            {% csrf_token %}
+Order ID:Will be generated after confirm<br>
+User Name:{{ usr.user_name }}<br>
+Book Name:{{ book.book_name }}<br>
+Book Points:{{ book.points }}<br>
+Address:{{ usr.address }}
+<input type="text" style="visibility: hidden;" name="book" value="{{ book.book_name }}">
+<input placeholder="Change Address" type="text" name="add" style="width: 100%;">
+
+<button name="submit" type="submit" id="contact-submit">Confirm</button>  
+</form>
+<a href="{% url 'main:index' %}" class="btn btn-info btnBg">Cancel</a>
+</body>
+</html>

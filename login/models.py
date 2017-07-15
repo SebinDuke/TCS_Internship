@@ -7,6 +7,7 @@ class User(models.Model):
     email = models.CharField(max_length=120)
     pwd= models.CharField(max_length=32)
     points= models.IntegerField(default=0)
+    address = models.CharField(max_length=200)
     #no_of_topics=models.IntegerField(default=0)
     #type_user=models.BooleanField()
     def __str__(self):

@@ -22,4 +22,11 @@ urlpatterns = [
 
     #url for search:
     url(r'^search$', views.search, name='search'),
+
+    #url for search:
+    url(r'^confirm$', views.confirm, name='confirm'),
+
+    #url for search:
+    url(r'^orders$', views.orders, name='orders'),
+
 ]

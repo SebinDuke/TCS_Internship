@@ -15,7 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'readers-stop.herokuapp.com',
-    '127.0.0.1',
+    '127.0.0.1','localhost'
     ]
 
 
@@ -117,4 +117,3 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
