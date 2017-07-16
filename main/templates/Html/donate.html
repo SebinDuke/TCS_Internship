@@ -75,6 +75,21 @@
 <!-- ======================================================================================================================= -->
 
 
+
+ <div class = "container" class="col-md-12 col-xs-12 col-lg-12 col-sm-12"> 
+        <div class="col-md-12 search"> 
+        
+          
+          <div class="col-md-12">
+          <form method="POST" action="{% url 'main:search' %}">
+            {% csrf_token %}
+            <input type="text" class="form-control" id="search" name = "search" placeholder="&#xF002;    Search by Name or Author..."/ style="font-family: FontAwesome"> 
+
+     
+          </form>
+          </div>
+      </div>
+      </div>
        
         <!-- {% if usr %}
             <h2> {{ usr.user_name }}</h2>

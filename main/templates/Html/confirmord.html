@@ -85,19 +85,82 @@
 
 
 <!-- ======================================================================================================================= -->
-<br><br><br><br><br><br>
-<form method="POST" action="{% url 'main:confirm' %}">
-            {% csrf_token %}
-Order ID:Will be generated after confirm<br>
-User Name:{{ usr.user_name }}<br>
-Book Name:{{ book.book_name }}<br>
-Book Points:{{ book.points }}<br>
-Address:{{ usr.address }}
-<input type="text" style="visibility: hidden;" name="book" value="{{ book.book_name }}">
-<input placeholder="Change Address" type="text" name="add" style="width: 100%;">
 
-<button name="submit" type="submit" id="contact-submit">Confirm</button>  
+
+
+<div class="container">
+        <div class = "col-xs-12 col-lg-12 col-sm-12 col-md-12" style="background-color: #f1f1f1; margin-top: 15%"><br><br><br>
+<form method="POST" action="{% url 'main:confirm' %}">
+
+<div class=" titleHeading" style = "align-items:center">
+            {% csrf_token %}
+<div style="color: red">Order ID: *Will be generated after your order is confirmed*<br></div>
+User Name: {{ usr.user_name }}<br>
+Book Name: {{ book.book_name }}<br>
+Book Points: {{ book.points }}<br>
+Address: {{ usr.address }}
+</div>
+<input type="text" style="visibility: hidden;" name="book" value="{{ book.book_name }}">
+<div class="form-group">
+<input placeholder="Change Address" type="text" name="add" style="width: 100%;" class="form-control">
+</div>
+<div id="container">
+<button name="submit" type="submit" id="contact-submit" class="btn btn-info btnBg" style="margin: 20px 10px;height: 40px;width: 200px">Confirm</button>  
 </form>
-<a href="{% url 'main:index' %}" class="btn btn-info btnBg">Cancel</a>
+<a href="{% url 'main:index' %}" class="btn btn-info btnBg" style="margin:20px 10px;height: 40px;width: 200px">Cancel</a></div>
+</div>
+</div>
+
+
+
+
+<!--================-->
+<link rel="stylesheet" type="text/css" href="{% static '/main/footer.css' %}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="dashboard-page">
+
+    <div class='footer' style="margin-top: 10%;">
+ <div class='container'>
+   <div class='row'>
+
+     <div class='clearfix visible-xs'></div>
+
+     
+
+
+    <div class='col-sm-12 col-md-12 col-xs-12' style="text-align: center; align-items: center;">
+      
+
+      <h4>CONTACT US</h4>
+      <h5 style="color:#ED5E44;">+91 9999688904</h5>
+      <h5 style="color:#ED5E44;">help_readers@gmail.com</h5>
+   
+    </div>
+
+  </div>
+
+  
+
+  </div>
+  <div class="sec-footer">
+       <div style="display:flex; justify-content:center;align-items:center;">
+           
+           <img style="padding:0 20px; height: 50px;" src="{% static 'images/footer_logo.png' %}">
+     </div>
+  </div>
+  <div style="text-align:center;background-color:#252525; height:60px;padding-top: 10px">
+  <div class="sec-content" style="display: inline">
+        &copy; 2017 Reader's Stop
+        <p>Made with <i class="fa fa-heart" aria-hidden="true"></i> at TCS.
+      </div> 
+
+    </div>
+</div> 
+</div> 
+<!-- ================================================================= -->
+
+
 </body>
 </html>
